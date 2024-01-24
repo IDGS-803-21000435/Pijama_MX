@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -41,7 +41,34 @@ def suma(n1, n2):
 def func2(ab = "UTL"):
     return "el valor es: "+ ab
     
+@app.route("/multiplicar", methods=["GET","POST"])
+def multi():
+    if request.method == "POST":
+        num1= request.form.get("n1")
+        num2 = request.form.get("n2")
+        return "<h1>La multiplicacion es:  {}</h1>".format(str(int(num1)*int(num2)))
+    else:
+        return '''
+        <form action"/multiplicar method="POST">
+            <label>N1:</label>
+            <input type="text" name="n1" />
+            <br>
+            <label>N2:</label>
+            <input type="text" name="n2" />
+            <input type="submit" />
+        </form>
+        '''
 
+@app.route("/formulario1")
+def formulario1():
+    return render_template("formulario.html")
+
+@app.route("/resultado", methods=["GET","POST"])
+def resultado():
+    if request.method == "POST":
+        num1= request.form.get("n1")
+        num2 = request.form.get("n2")
+        return "<h1>La multiplicacion es:  {}</h1>".format(str(int(num1)*int(num2)))
 
 if __name__ =="__main__":
     app.run(debug = True)   #se utiliza debug = True para ctivar "actualizaciones en caliente" similar liveServer

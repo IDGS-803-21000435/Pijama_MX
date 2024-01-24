@@ -5,41 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../static/bootstrap/bootstrap/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 30px;
+        }
+    </style>
+    <link rel="stylesheet" href="../static/bootstrap/bootstrap/css/bootstrap-responsive.min.css">
 </head>
 
 <body>
-
-    <h1>Escuela {{escuela}}</h1>
-
-    {% for nom in alumnos %}
-
-    <h1>{{nom}}</h1>
-
-    {% endfor %}
-
-
+    <div class="navbar navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="">
+                    IDGS-803
+                </a>
+                <ul class="nav">
+                    <li class="active">
+                        <a href="">
+                            <i class="icon-home icon-white"></i>
+                            Usuarios
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <li class="icon-user icon-white"></li>
+                            Alumnos
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-
-    <table>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
+    
+<div class="container">
+    
     {%block content%}
 
     {%endblock%}
-</body>
 
-</html>
+    </body>
+
+    </html>
+</div>
+    
