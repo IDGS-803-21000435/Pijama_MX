@@ -63,6 +63,10 @@ def multi():
 def formulario1():
     return render_template("formulario.html")
 
+@app.route("/formulario2")
+def formulario2():
+    return render_template("formulario2.html")
+
 @app.route("/resultado", methods=["GET","POST"])
 def resultado():
     if request.method == "POST":
