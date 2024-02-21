@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../static/bootstrap/bootstrap/css/bootstrap.min.css">
     <style>
         body {
-            padding-top: 30px;
+            padding-top: 50px;
         }
     </style>
     <link rel="stylesheet" href="../static/bootstrap/bootstrap/css/bootstrap-responsive.min.css">
@@ -40,6 +40,15 @@
     </div>
     
 <div class="container">
+    {%with messages = get_flashed_messages()%}
+        {%if messages %}
+            {%for message in messages %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     
     {%block content%}
 

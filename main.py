@@ -1,9 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash, Response, redirect
+from flask_wtf.csrf import CSRFProtect
 import form
+from flask import g
 
 app = Flask(__name__)
+app.secret_key = 'clave_secreta'
 
-@app.route("/")
+
+@app.route("/index")
 def index():
     escuela = "UTL"
     alumnos = ["MArio","Luis","Pedro","Dario"]
@@ -11,16 +15,21 @@ def index():
 
 @app.route("/alumnos", methods=["GET","POST"])
 def alumno():
+    g.nombre = 'Daniel'
+    print('dentro alumnos')
     nom = ''
     apa = ''
     ama = ''
     correo = ''
     alum_form = form.UserForm(request.form)
-    if request.method == 'POST':
+    if request.method == 'POST' and alum_form.validate():
+        print(f'hola: {g.nombre}')
         nom = alum_form.nombre.data
         apa = alum_form.apaterno.data
         ama = alum_form.amaterno.data
         correo = alum_form.correo.data
+        mensaje = f'Bienvenido {nom}'
+        flash(mensaje)
         print("nombre: {x}, apaterno: {y}, amaterno: {t}, correo: {w}".format(x = nom, y = apa, t = ama, w = correo))
         
     
@@ -88,6 +97,28 @@ def resultado():
         num2 = request.form.get("n2")
         return "<h1>La multiplicacion es:  {}</h1>".format(str(int(num1)*int(num2)))
 
+
+
+# realizado 20/02/2024 
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.before_request
+def before_request():
+    g.nombre = 'Daniel'
+    print('before_request')
+    
+    
+@app.after_request
+def after_request(response):
+    print('ultimo')
+    if 'Daniel' not in g.nombre and request.endpoint not in['/index']:
+        return redirect('index.html')
+    return response
+    
+# ------------------------------------------------------------
 if __name__ =="__main__":
     app.run(debug = True)   #se utiliza debug = True para ctivar "actualizaciones en caliente" similar liveServer
 #   para tumbar el servidor es con el comando ctrl + c

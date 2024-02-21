@@ -1,8 +1,8 @@
 from io import open
 
-archivo_texto=open('nombres.txt', 'a')
+archivo_texto=open('nombres.txt', 'a+')
 
-#archivo_texto.write('\n datos en el archivo')
+archivo_texto.write('\n peli')
 
 for lines in archivo_texto.readlines():
     print(lines.rstrip())

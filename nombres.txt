@@ -1,3 +1,5 @@
 
  datos en el archivo
  edicion archivo
+ modo
+ peli
